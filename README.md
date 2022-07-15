@@ -19,6 +19,7 @@ All this task must be done in 1 day
 - Implement logout button
 
 - Please READ SDK file and reuse code when you can. DO NOT REINVENT THE WHEEL.
+- Use React Drag and drop library https://react-dnd.github.io/react-dnd/about to be able to rearrange the rows and columns in the table in dashboard. On Refresh, the columns go back to default
 
 ## Login
 
