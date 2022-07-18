@@ -2,8 +2,8 @@
 
 All this task must be done in 1 day
 
-- in src/utils/MkdSDK.jsx implement Line 13
-- in src/utils/MkdSDK.jsx implement Line 28
+- in src/utils/MkdSDK.jsx implement Line 17
+- in src/utils/MkdSDK.jsx implement Line 91
 - in src/pages/AdminLoginPage.jsx implement Line 30
 - once login successful, call snackbar component to show logged in toast. DONT use 3rd party library
 - in src/authContext.jsx implement 16
