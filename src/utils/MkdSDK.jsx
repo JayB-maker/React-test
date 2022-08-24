@@ -12,9 +12,30 @@ export default function MkdSDK() {
   this.setTable = function (table) {
     this._table = table;
   };
-  
+
   this.login = async function (email, password, role) {
-    //TODO
+    const loginData = await fetch(
+      `https://reacttask.mkdlabs.com/v2/api/lambda/login`,
+      {
+        method: "post",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+          "x-project": base64Encode,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(email, password, role),
+      }
+    );
+    const jsonData = await loginData.json();
+
+    if (loginData.status === 401) {
+      throw new Error(jsonData.message);
+    }
+
+    if (loginData.status === 403) {
+      throw new Error(jsonData.message);
+    }
+    return jsonData;
   };
 
   this.getHeader = function () {
@@ -27,7 +48,7 @@ export default function MkdSDK() {
   this.baseUrl = function () {
     return this._baseurl;
   };
-  
+
   this.callRestAPI = async function (payload, method) {
     const header = {
       "Content-Type": "application/json",
@@ -55,7 +76,7 @@ export default function MkdSDK() {
           throw new Error(jsonGet.message);
         }
         return jsonGet;
-      
+
       case "PAGINATE":
         if (!payload.page) {
           payload.page = 1;
@@ -84,10 +105,24 @@ export default function MkdSDK() {
       default:
         break;
     }
-  };  
+  };
 
   this.check = async function (role) {
-    //TODO
+    const checkData = await fetch(this._baseurl + `/v2/api/rest/lambda/check`, {
+      method: "post",
+      headers: header,
+      body: JSON.stringify(role),
+    });
+    const jsonData = await checkData.json();
+
+    if (checkData.status === 401) {
+      throw new Error(jsonData.message);
+    }
+
+    if (checkData.status === 403) {
+      throw new Error(jsonData.message);
+    }
+    return jsonData;
   };
 
   return this;

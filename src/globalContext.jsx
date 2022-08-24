@@ -31,6 +31,7 @@ const reducer = (state, action) => {
 };
 
 export const showToast = (dispatch, message, timeout = 3000) => {
+  console.log(message);
   dispatch({
     type: "SNACKBAR",
     payload: {

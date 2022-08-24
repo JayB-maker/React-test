@@ -11,9 +11,11 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
+  console.log(action);
   switch (action.type) {
     case "LOGIN":
       //TODO
+      localStorage.setItem("token", action.data.token);
       return {
         ...state,
       };
@@ -43,10 +45,16 @@ export const tokenExpireError = (dispatch, errorMessage) => {
 
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const tokenKey = localStorage.getItem("token");
+  console.log(state);
 
   React.useEffect(() => {
     //TODO
-  }, []);
+    if (tokenKey !== state.token) {
+      console.log("Token mismatch");
+      tokenExpireError();
+    }
+  });
 
   return (
     <AuthContext.Provider
