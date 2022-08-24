@@ -30,7 +30,6 @@ const AdminLoginPage = () => {
   });
 
   const onSubmit = async (data) => {
-    // console.log(data);
     let sdk = new MkdSDK();
     const enter = await sdk
       .login({
@@ -39,10 +38,9 @@ const AdminLoginPage = () => {
         role: "admin",
       })
       .then((response) => {
-        console.log(response);
         jam.dispatch({ type: "LOGIN", data: response });
         showToast(dispatch, "login successful");
-        navigate("/admin");
+        navigate("/admin-dashboard");
       });
   };
 
