@@ -4,6 +4,7 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    // SETTING UP THE WEBSITE COLOR 
     colors: {
       text_gray: '#696969',
       secondary: '#111111',
