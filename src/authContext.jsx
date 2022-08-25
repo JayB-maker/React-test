@@ -14,6 +14,7 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
       //TODO
+      //STORING THE TOKEN GOTTEN AFTER LOGGING IN TO LOCAL STORAGE
       localStorage.setItem("token", action.data.token);
       return {
         ...state,
@@ -44,17 +45,21 @@ export const tokenExpireError = (dispatch, errorMessage) => {
 
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const tokenKey = localStorage.getItem("token");
+
+  //IMPLEMENTING THE FUNCTION TO CHECK IF THE TOKEN IS STILL VALID
+  const checkToken = () => {
+    sdk
+      .check({
+        role: "admin",
+      })
+      .then((response) => console.log("response", response));
+  };
 
   React.useEffect(() => {
     //TODO
-    initialState.token = tokenKey;
-    const requiredToken = state.token;
-    if (requiredToken !== initialState.token) {
-      console.log("Token mismatch");
-      tokenExpireError();
-    }
-  });
+    //CALLING IT TO RENDER ON PAGE LOAD
+    checkToken();
+  }, []);
 
   return (
     <AuthContext.Provider
