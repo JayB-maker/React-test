@@ -7,7 +7,7 @@ const SnackBar = () => {
   return show ? (
     <div
       id="mkd-toast"
-      className="absolute top-5 right-5 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400"
+      className="absolute top-5 right-5 flex items-center w-full max-w-xs p-4 text-text_gray-500 bg-accent rounded-lg shadow dark:text-gray-400"
       role="alert"
     >
       <div className="text-sm font-normal">{state.globalMessage}</div>
