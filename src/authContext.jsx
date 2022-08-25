@@ -48,7 +48,9 @@ const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     //TODO
-    if (tokenKey !== state.token) {
+    initialState.token = tokenKey;
+    const requiredToken = state.token;
+    if (requiredToken !== initialState.token) {
       console.log("Token mismatch");
       tokenExpireError();
     }
