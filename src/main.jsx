@@ -21,6 +21,7 @@ function renderRoutes(role) {
     default:
       return (
         <Routes>
+          {/* CORRECTING THE PAGE NOT FOUND FLICK */}
           <Route exact path="/" element={<AdminLoginPage />}></Route>
           <Route
             exact

@@ -3,11 +3,21 @@ import arrow from "./assets/arrow.png";
 import avatar from "./assets/avatar.png";
 import arrow_up from "./assets/arrow-up.png";
 import MkdSDK from "../utils/MkdSDK";
+import { useNavigate } from "react-router";
+import { useDrag, useDrop } from "react-dnd/dist/hooks";
 
 const AdminDashboardPage = () => {
   const [pageNumber, setPageNumber] = React.useState(1);
   const [movieList, setMovieList] = React.useState([]);
+  const navigate = useNavigate();
 
+  //IMPLEMENTING THE LOGOUT FUNCTION
+  const logoutFunction = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
+  //IMPLEMENTING THE MOVIE API
   const getMovies = () => {
     const sdk = new MkdSDK();
     sdk
@@ -26,9 +36,10 @@ const AdminDashboardPage = () => {
       });
   };
 
+  //IMPLEMENTING THE NEXT PAGE API
   const nextPage = () => {
     console.log("go");
-    pageNumber > 9 ? setPageNumber(11) : setPageNumber(pageNumber + 1);
+    pageNumber > 11 ? setPageNumber(12) : setPageNumber(pageNumber + 1);
     const sdk = new MkdSDK();
     sdk
       .callRestAPI(
@@ -44,6 +55,7 @@ const AdminDashboardPage = () => {
       .catch((err) => {});
   };
 
+  //IMPLEMENTING THE PREVIOUS PAGE API
   const prevPage = () => {
     console.log("go");
     pageNumber > 1 ? setPageNumber(pageNumber - 1) : setPageNumber(1);
@@ -62,20 +74,51 @@ const AdminDashboardPage = () => {
       .catch((err) => {});
   };
 
+  //CALLING THE MOVIE API
   React.useEffect(() => {
     getMovies();
   }, []);
 
+  // IMPLEMENTING THE DRAG AND DROP
+  // const [{ isOver }, addToTeamRef] = useDrop({
+  //   accept: "player",
+  //   collect: (monitor) => ({ isOver: !!monitor.isOver }),
+  // });
+  // const [{ isOver: isPlayerOver }, removeFromTeamRef] = useDrop({
+  //   accept: "team",
+  //   collect: (monitor) => ({ isOver: !!monitor.isOver }),
+  // });
+
+  // const [{ isDraggable }, dragRef] = useDrag({
+  //   type: player,
+  //   item: id,
+  //   end: (item, monitor) => {
+  //     const dropResult = monitor.getDropResult();
+
+  //     if (dropResult && item) {
+  //       onDropPlayer(item);
+  //     }
+  //   },
+  //   collect: (monitor) => {
+  //     isDragging: monitor.isDragging();
+  //   },
+  // });
+
   return (
     <>
-      <div className="w-screen absolute block top-0 left-0 bg-secondary text-gray-700 py-5 px-20 m-0 my-0">
+      <div className="w-screen absolute block top-0 left-0 bg-secondary min-h-screen text-gray-700 py-5 px-20 m-0 my-0">
         <div className="w-full h-full">
+          {/* HEADER */}
           <div className="flex items-center justify-between w-full">
             <h1 className="text-4xl font-bold text-text_white">App</h1>
-            <button className="bg-accent rounded-full text-text_black text-bold text-lg py-2 px-6">
+            <button
+              className="bg-accent rounded-full text-text_black text-bold text-lg py-2 px-6"
+              onClick={() => logoutFunction()}
+            >
               Logout
             </button>
           </div>
+
           <div className="flex items-center justify-between w-full mt-10">
             <h1 className="text-2xl font-bold text-text_white">
               Todays LeaderBoard
@@ -90,6 +133,8 @@ const AdminDashboardPage = () => {
               <h6 className="text-sm text-text_white">11:34</h6>
             </div>
           </div>
+
+          {/* TABLE */}
           <div className="flex justify-between items-center">
             <div className="flex gap-4 p-5">
               <p className="text-sm text-text_gray">#</p>
@@ -106,12 +151,13 @@ const AdminDashboardPage = () => {
               <div
                 className="flex items-center border-2 border-text_gray rounded-2xl h-15"
                 key={index}
+                // ref={dragRef}
               >
                 <div className="flex items-center w-6/12 gap-3 p-5">
                   <p className="text-sm text-text_gray">{movie.id}</p>
                   <img
                     src={movie.photo}
-                    allt={movie.username}
+                    alt={movie.username}
                     className="w-32 h-16 rounded-lg"
                   />
                   <p className="text-xl pr-10 text-text_white font-light">
@@ -139,6 +185,8 @@ const AdminDashboardPage = () => {
               </div>
             ))}
           </div>
+
+          {/* FOOTER OR ACTION BUTTON */}
           <div className="flex gap-4 mt-10 justify-end">
             <button
               className="bg-accent rounded text-text_black text-bold text-lg p-3 px-6"
