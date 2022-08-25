@@ -13,6 +13,7 @@ export default function MkdSDK() {
     this._table = table;
   };
 
+  // IMPLEMENTING THE LOGIN API
   this.login = async function (email, password, role) {
     const loginData = await fetch(
       `https://reacttask.mkdlabs.com/v2/api/lambda/login`,
@@ -108,11 +109,21 @@ export default function MkdSDK() {
   };
 
   this.check = async function (role) {
-    const checkData = await fetch(this._baseurl + `/v2/api/rest/lambda/check`, {
-      method: "post",
-      headers: header,
-      body: JSON.stringify(role),
-    });
+    const header = {
+      "Content-Type": "application/json",
+      "x-project": base64Encode,
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    };
+
+    // IMPLEMENTING THE CHECK API
+    const checkData = await fetch(
+      `https://reacttask.mkdlabs.com/v2/api/lambda/check`,
+      {
+        method: "post",
+        headers: header,
+        body: JSON.stringify(role),
+      }
+    );
     const jsonData = await checkData.json();
 
     if (checkData.status === 401) {
