@@ -30,6 +30,7 @@ const AdminLoginPage = () => {
   });
 
   const onSubmit = async (data) => {
+    // IMPLEMENTING THE ONSUBMIT FUNCTION TO ACCEPT THE INPUT DETAILS AND NAVIGATE TO THE DASHBOARD IF THERE IS A TOKEN
     let sdk = new MkdSDK();
     const enter = await sdk
       .login({
