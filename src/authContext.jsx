@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
       .check({
         role: "admin",
       })
-      .then((response) => console.log("response", response));
+      .then((response) => console.log("Token Validation Output:", response));
   };
 
   React.useEffect(() => {
