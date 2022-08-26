@@ -2,7 +2,7 @@ import React from "react";
 import { AuthContext } from "./authContext";
 import { Routes, Route } from "react-router-dom";
 import SnackBar from "./components/SnackBar";
-import AdminDashboardPage from "./pages/AdminDashboardPage";
+import AdminDashboardPage from "./pages/adminDashboard/AdminDashboardPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
