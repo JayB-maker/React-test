@@ -1,5 +1,6 @@
 import React from "react";
 import arrow from "../assets/arrow.png";
+import profile from "../assets/profile.png";
 import { useNavigate } from "react-router";
 import Draggable from "../adminDashboard/Draggable";
 
@@ -20,10 +21,10 @@ const AdminDashboardPage = () => {
           <div className="flex items-center justify-between w-full">
             <h1 className="text-4xl font-bold text-text_white">App</h1>
             <button
-              className="bg-accent rounded-full text-text_black text-bold text-lg py-2 px-6"
+              className="bg-accent rounded-full flex items-center gap-1 text-text_black text-bold text-lg py-2 px-6"
               onClick={() => logoutFunction()}
             >
-              Logout
+              <img src={profile} alt="arrow" /> Logout
             </button>
           </div>
 
